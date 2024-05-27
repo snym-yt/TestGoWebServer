@@ -1,4 +1,7 @@
 <h1>TEST</h1>
 <div>
-    <p>aaa</p>
+    <p>Messages</p>
+    {{ range .Messages}}
+    <p>{{.}}</p>
+    {{ end }}
 </div>
