@@ -38,6 +38,16 @@ func viewHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func viewHandler_index(w http.ResponseWriter, r *http.Request) {
+	html, err := template.ParseFiles("index.html")
+	if err != nil {
+		log.Fatal(err)
+	}
+	if err := html.Execute(w, nil); err != nil {
+		log.Fatal(err)
+	}
+}
+
 func fileRead(fileName string) []string {
 	var messageList []string
 	file, err := os.Open(fileName)
@@ -57,5 +67,7 @@ func main() {
 	fmt.Println("/hello stands")
 	http.HandleFunc("/view", viewHandler)
 	fmt.Println("/view stands")
+	http.HandleFunc("/index", viewHandler_index)
+	fmt.Println("/index stands")
 	log.Fatal(http.ListenAndServe("localhost:8080", nil))
 }

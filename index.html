@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+
+  <head>
+    <title>PMusic</title>
+    <script src="https://cdn.jsdelivr.net/npm/blockly@1.0.0/blockly_compressed.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/blockly@1.0.0/blocks_compressed.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/blockly@1.0.0/msg/js/en.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/blockly@1.0.0/javascript_compressed.min.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="node_modules/@blockly/field-slider/dist/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+    <script src="CodeBlocks/Japanese/blocks/js/play_block.js"></script>
+    <script src="CodeBlocks/Japanese/generators/play.js"></script>
+    <script src="CodeBlocks/Japanese/blocks/js/play_block2.js"></script>
+    <script src="CodeBlocks/Japanese/generators/play2.js"></script>
+    <script src="CodeBlocks/Japanese/blocks/js/gauss_block.js"></script>
+    <script src="CodeBlocks/Japanese/generators/gauss.js"></script>
+    <script src="CodeBlocks/Japanese/blocks/js/gauss_block2.js"></script>
+    <script src="CodeBlocks/Japanese/generators/gauss2.js"></script>
+    <script src="CodeBlocks/Japanese/blocks/js/weibul_block.js"></script>
+    <script src="CodeBlocks/Japanese/generators/weibul.js"></script>
+    <script src="CodeBlocks/Japanese/blocks/js/weibul_block2.js"></script>
+    <script src="CodeBlocks/Japanese/generators/weibul2.js"></script>
+    <script src="CodeBlocks/Japanese/blocks/js/randwalk_block1.js"></script>
+    <script src="CodeBlocks/Japanese/generators/randwalk1.js"></script>
+    <script src="CodeBlocks/Japanese/blocks/js/randwalk_block.js"></script>
+    <script src="CodeBlocks/Japanese/generators/randwalk.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+    <script src="./jquery-linedtextarea-master/jquery-linedtextarea.js"></script>
+    <link href="./jquery-linedtextarea-master/jquery-linedtextarea.css" type="text/css" rel="stylesheet"/>
+
+    <script src="./JSPMusic/JSast.js"></script>
+    <script src="./JSPMusic/JSlexer.js"></script>
+    <script src="./JSPMusic/JSparser.js"></script>
+    <script src="./JSPMusic/JStoken.js"></script>
+    <script src="./ASTtoXML.js"></script>
+
+  </head>
+
+  <body>
+
+  
+
+
+  <div id="content" style="display:flex;">
+    <div>
+      <button class="btn_code_lang">
+        <a data-siteview="jp" href="./index.html">日本語</a>
+      </button>
+      <button class="btn_code_lang" onclick="setEnglish();">
+        <a data-siteview="en">English</a>
+      </button>
+      <!-- 2タブ構成 -->
+      <div class="tab-wrap">
+        <input id="TAB-01" type="radio" name="TAB" class="tab-switch" checked="checked" /><label class="tab-label" for="TAB-01">block result</label>
+        <div class="tab-content">
+          <!-- コード反映欄 -->
+          <div id="code" style="width: 700px; padding: 5px; border: 2px solid black;"><pre/></div>
+        </div>
+        <input id="TAB-02" type="radio" name="TAB" class="tab-switch" /><label class="tab-label" for="TAB-02">write script</label>
+        <div class="tab-content">
+          <!-- スクリプト記述欄 -->
+          <div id="codeEditor" class="tabcontent">
+            <textarea class="lined" id="codeInput" style="width: 100%;">
+loop(10){\
+  play(60, 0.1);\
+  play(0, 0.0);\
+  play(0, 0.0);\
+}            
+            </textarea>
+            <script>
+              $(function() { $(".lined").linedtextarea();});
+            </script>
+          </div>
+        </div>
+      </div>
+      
+      <div class="jp">
+        <button class="btn_code" id="Save" onclick="saveBlocks();">保存</button> <button class="btn_code" id="Load" onclick="loadBlocks();">呼出し</button> <button class="btn_code" id="Block" onclick="makeAST();">ブロック化</button>
+      </div>
+      <div class="en">
+        <button class="btn_code" id="SaveEN" onclick="saveBlocks();">Save</button> <button class="btn_code" id="LoadEN" onclick="loadBlocks();">Load</button> 
+      </div>
+      <button class="btn_code" id="readtext" onclick="makeAST();">textareaの内容を取得して標準出力</button> 
+      <button class="btn_code" id="writetext" onclick="makeAST();">write.goをブラウザ上で実行</button> 
+
+
+    </div>
+    <!-- ブロック配置欄 -->
+    <div id="blocklyDiv" style="height: 650px; width: 1150px; padding: 5px"></div>
+  </div>
+
+  <!-- 説明欄 -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <script src="https://cdn.jsdelivr.net/npm/marked@3.0.7/marked.min.js"></script> -->
+  <script src="./marked-3.0.7/marked.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+
+
+<!-- ------------------------------------------------------------------------------------------------------------------------------ -->
+
+  <xml id="toolbox" style="display: none">
+    <category name="General">
+      <block type="controls_if"></block>
+      <block type="logic_compare"></block>
+      <block type="math_number"></block>
+      <block type="math_arithmetic"></block>
+    </category>
+
+    <category name="Music" colour="0">
+      <block type="play1"></block>
+      <block type="play"></block>
+      <block type="gauss1"></block>
+      <block type="gauss"></block>
+      <block type="weibul1"></block>
+      <block type="weibul"></block>
+      <block type="randwalk1"></block>
+      <block type="randwalk"></block>
+    </category>
+
+    <category name="Loops" colour="120">
+      <block type="controls_repeat_ext">
+        <value name="TIMES">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="controls_whileUntil"></block>
+    </category>
+
+
+    <category name="Variables" colour="330" custom="VARIABLE"></category>
+
+    <category name="Lists" colour="260">
+      <block type="lists_create_with">
+        <mutation items="0"></mutation>
+      </block>
+      <block type="lists_create_with"></block>
+      <block type="lists_length"></block>
+    </category>
+  </xml>
+
+  <xml id="startBlocks" style="display: none">
+    <block type="controls_repeat_ext" x="20" y="20"></block>
+  </xml>
+
+  <!-- ------------------------------------------------------------------------------------------------------------------------------ -->
+
+    <script src="script.js"></script>
+
+  </body>
+
+</html>
+

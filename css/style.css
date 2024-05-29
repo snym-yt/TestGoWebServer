@@ -1,0 +1,319 @@
+/* 横幅が長い場合に改行するためのスタイル */
+.scroll-container {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    overflow-x: auto; /* 横スクロール可能にする */
+    max-width: 1064px; /* 任意の横幅を指定 */
+    max-height: 365px; /* 任意の縦幅を指定 */
+    border: 1px solid #ccc; /* 枠線を追加（任意） */
+    padding: 10px; /* 任意の余白を指定 */
+}
+
+.flex-container {
+    display: flex;
+}
+
+.flex-container > div {
+    flex: 1; /* 横幅を均等に分ける */
+}
+
+.flex-container > img {
+    max-width: 42.7%; /* 画像が親要素に収まるようにする */
+    height: 42.7%;
+}
+
+/* ## の見出しのデザイン設定 */
+h2 {
+    padding: 0rem 0rem;
+    margin-bottom: 0rem;
+    border-bottom: 3px solid #b2d5de;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+h5 {
+    padding: 0rem 0rem;
+    margin-bottom: 0rem;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* ポップアップ */
+body.open_popup {
+    overflow: hidden;
+}
+
+.bg_onetime_popup {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 9999;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.5s;
+}
+
+body.open_popup .bg_onetime_popup {
+    opacity: 1;
+    visibility: visible;
+}
+
+.onetime_popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 50%;
+    min-width: 500px;
+    background-color: #fff;
+}
+
+.onetime_popup_title {
+    position: relative;
+    padding: 1em 60px;
+    margin: 0px;
+    background-color: #3388dd;
+    color: #fff;
+    font-size: 49px;
+    text-align: center;
+    line-height: 1;
+}
+
+.onetime_popup_title_close {
+    display: none;
+}
+.onetime_popup_title_close::before,
+.onetime_popup_title_close::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 100%;
+    height: 4px;
+    background-color: #fff;
+    content: "";
+}
+.onetime_popup_title_close::before {
+    transform: translateX(-50%) translateY(-50%) rotate(45deg);
+}
+.onetime_popup_title_close::after {
+    transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+}
+
+.onetime_popup_content {
+    padding: 60px 30px;
+    text-align: center;
+}
+
+
+/* ＝================================= */
+/* 波形選択ボタン */
+/* ＝================================= */
+
+/* ボタンを大きくするスタイル */
+.languageButton {
+line-height: 1.5;
+font-size: 50px;
+padding: 10px 20px;
+margin: 5px;
+}
+
+/* ラジオボタン装飾 */
+.waveselect input{
+    display: none;
+}
+
+.waveselect label{
+    display: block;
+    float: left;
+    cursor: pointer;
+    width: 160px;
+    margin: 0;
+    padding: 12px 5px;
+    border-right: 1px solid #abb2b7;
+    background: #bdc3c7;
+    color: #555e64;
+    font-size: 14px;
+    text-align: center;
+    line-height: 1;
+    transition: .2s;
+}
+
+.waveselect label:first-of-type{
+    border-radius: 3px 0 0 3px;
+}
+
+.waveselect label:last-of-type{
+    border-right: 0px;
+    border-radius: 0 3px 3px 0;
+}
+
+.waveselect input[type="radio"]:checked + label {
+    background-color: #a1b91d;
+    color: #fff;
+}
+
+/* ＝================================= */
+/* Run, Copy, Save, Loadボタン */
+/* ＝================================= */
+
+.btn_code {
+	display: inline-block;
+	text-decoration: none;
+	width: auto;
+	padding: 0.5rem 4rem;
+    margin-top: 2px;
+	font-weight: bold;
+	border-radius: 0.3rem;
+	border-bottom: 5px solid #0686b2;
+	background: #27acd9;
+	color: #fff;
+}
+.btn_code:hover {
+	margin-top: 5px;
+	border-bottom: 1px solid #0686b2;
+	color: #fff;
+}
+
+/* ＝================================= */
+/* タブに関して */
+/* ＝================================= */
+
+.tab-wrap {
+	background: White;
+	box-shadow: 0 0 5px rgba(0,0,0,.1);
+	display: flex;
+	flex-wrap: wrap;
+	overflow: hidden;
+	padding: 0 0 20px;
+}
+
+.tab-label {
+	color: Gray;
+	cursor: pointer;
+	flex: 1;
+	font-weight: bold;
+	order: -1;
+	padding: 12px 24px;
+	position: relative;
+	text-align: center;
+	transition: cubic-bezier(0.4, 0, 0.2, 1) .2s;
+	user-select: none;
+	white-space: nowrap;
+	-webkit-tap-highlight-color: transparent;
+}
+
+.tab-label:hover {
+	background: rgba(0, 191, 255,.1);
+}
+
+.tab-switch:checked + .tab-label {
+	color: DeepSkyBlue;
+}
+
+.tab-label::after {
+	background: DeepSkyBlue;
+	bottom: 0;
+	content: '';
+	display: block;
+	height: 3px;
+	left: 0;
+	opacity: 0;
+	pointer-events: none;
+	position: absolute;
+	transform: translateX(100%);
+	transition: cubic-bezier(0.4, 0, 0.2, 1) .2s 80ms;
+	width: 100%;
+	z-index: 1;
+}
+
+.tab-switch:checked ~ .tab-label::after {
+	transform: translateX(-100%);
+}
+
+.tab-switch:checked + .tab-label::after {
+	opacity: 1;
+	transform: translateX(0);
+}
+
+.tab-content {
+	height:0;
+	opacity:0;
+	padding: 0 20px;
+	pointer-events:none;
+	transform: translateX(-30%);
+	transition: transform .3s 80ms, opacity .3s 80ms;
+	width: 100%;
+}
+
+.tab-switch:checked ~ .tab-content {
+	transform: translateX(30%);
+}
+
+.tab-switch:checked + .tab-label + .tab-content {
+	height: auto;
+	opacity: 1;
+	order: 1;
+	pointer-events:auto;
+	transform: translateX(0);
+}
+
+.tab-wrap::after {
+	content: '';
+	height: 20px;
+	order: -1;
+	width: 100%;
+}
+
+.tab-switch {
+	display: none;
+}
+
+body {
+	background: WhiteSmoke;
+    font-family: sans-serif;
+	margin: 10px;
+}
+
+/* ＝================================= */
+/* テキストエリアの縦を自動で伸縮 */
+/* ＝================================= */
+
+textarea {
+    /* 手動リサイズを禁止 */
+    resize: none; 
+    min-height: 100px; /* 高さの最小値を指定（任意） */
+    width: 90%;
+}
+
+/* ＝================================= */
+/* 言語切り替えテスト */
+/* ＝================================= */
+
+.btn_code_lang {
+	display: inline-block;
+	text-decoration: none;
+	width: 70px;
+    height: 30px;
+	padding: 0.5rem rem;
+    margin-bottom: 1px;
+	font-weight: bold;
+	border-radius: 0.3rem;
+	border-bottom: 2px solid #6d8346;
+	background: #a6c78e;
+	color: #fafafa;
+}
+.btn_code:hover {
+	margin-top: 5px;
+	border-bottom: 1px solid #6d8346;
+	color: #fff;
+}
+
+a,a:hover,a:visited{
+    color: inherit;
+    text-decoration:none; 
+}
