@@ -11,39 +11,15 @@
 [VisualPMusic説明スライド](https://docs.google.com/presentation/d/e/2PACX-1vT1mbMEAce7wPtNiAS6GiqaizWgwW2jgFR0ZFaZSC2VrczMZ1R3cTQyUSI6W9nwaBuXxxajNl4Gl-xy/pub?start=false&loop=false&delayms=3000&slide=id.g26412e88182_1_0)
 
 ## ローカルサーバ
-##### (1)ローカルサーバのインストール
-最初にsever.jsのhttp-serverモジュールをグローバルにインストールする．
-ターミナルまたはコマンドプロンプトを開き，以下のコマンドを実行する．
-これにより`http-server`コマンドが使えるようになる．
-
-```bash
-npm install -g http-server
+##### (1)ローカルサーバ起動
+`server.go`を起動する．
+```
+go run server.go
 ```
 
-##### (2)プロジェクトディレクトリでサーバ起動
-プロジェクトのディレクトリに移動し，以下のコマンドを実行してローカルサーバの起動．
-
-```bash
-http-server
-```
-デフォルトでポート8080が使用されるが，別のポートを使用したい場合は次のようにする．
-
-```bash
-http-server -p 3000
-```
-
-##### (3)ブラウザでアクセス
-ローカルサーバは起動したらブラウザで  http://localhost:8080 にアクセスする．
+##### (2)ブラウザでアクセス
+ローカルサーバは起動したらブラウザで  http://localhost:8080/index 等にアクセスする．
 ローカルサーバが起動している場合はプロジェクトのファイルに直接アクセスせずに指定したポートを使用すること．
-
-##### expressインストール
-https://expressjs.com/ja/starter/installing.html
-このサイトに則って`express`をインストールする．
-
-## JSのlexer & parser
-JavaScriptで書いたlexer, parserの細かいコミットは次のリポジトリで参照可能．
-
-[JSPMusic](https://github.com/snym-yt/JSPMusic)
 
 
 ### 構文
